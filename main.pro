@@ -1,5 +1,5 @@
 # define your application name here 
-TARGET = yourAppName
+TARGET = bichmoute
 
 # add your source cpp files here 
 SOURCES += \

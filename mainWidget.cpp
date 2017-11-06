@@ -13,7 +13,7 @@
 using namespace std;
 
 const QString MainWindow::_DEFAULT_FILE_NAME = "untitled";
-const QString MainWindow::_APPLICATION_NAME = "yourAppName";
+const QString MainWindow::_APPLICATION_NAME = "bichmoute";
 const QString MainWindow::_APPLICATION_EXTENSION = ".yan";
 QDir MainWindow::_CURRENT_PATH = QDir::currentPath();
 
@@ -106,11 +106,11 @@ void MainWindow::createActions() {
 #endif
 
   _helpAct = new QAction(tr("&Help"), this);
-  _helpAct->setStatusTip(tr("Show the application's Help"));
+  _helpAct->setStatusTip(tr("Show the bichmoute's Help"));
   connect(_helpAct,SIGNAL(triggered()),this,SLOT(help()));
 
   _aboutAct = new QAction(tr("&About"), this);
-  _aboutAct->setStatusTip(tr("Show the application's About box"));
+  _aboutAct->setStatusTip(tr("Show the bichmoute's About box"));
   connect(_aboutAct,SIGNAL(triggered()),this,SLOT(about()));
 
   Qt::Modifier frameNavModifier;
@@ -230,11 +230,13 @@ void MainWindow::help() {
 void MainWindow::about() {
   QString h = tr("<center><font size='12'> YOUR APPLICATION NAME (VERSION...)</font></center><br>"
 		 "Description<br><br>"
-		 "Copyright (C) YEAR: <br>"
+		 "Copyright (C) 2017: <br>"
 		 "EXAMPLE:<br>"
 		 "<a href='http://maverick.inria.fr/~Romain.Vergne/'>Romain Vergne</a> "
-		 "( <a href='mailto:romain.vergne@inria.fr'>romain.vergne@inria.fr</a> ) <br>"
-		 "OTHER STUDENTS...<br>"
+		 "( <a href='mailto:romain.couderc@grenoble-inp.org'>romain.couderc@grenoble-inp.org</a> ) <br>"
+		 "( <a href='mailto:theo.lambert@grenoble-inp.org' >theo.lambert@grenoble-inp.org <br>"
+		 "( <a href='mailto:theo.moins@grenoble-inp.org' >theo.moins@grenoble-inp.org <br>"
+ 		 "( <a href='mailto:william.didier@grenoble-inp.org' >william.didier@grenoble-inp.org <br>"
 		 );
 		 
   QMessageBox::about(this,"About",h);
