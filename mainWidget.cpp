@@ -228,15 +228,15 @@ void MainWindow::help() {
 }
 
 void MainWindow::about() {
-  QString h = tr("<center><font size='12'> YOUR APPLICATION NAME (VERSION...)</font></center><br>"
-		 "Description<br><br>"
-		 "Copyright (C) 2017: <br>"
-		 "EXAMPLE:<br>"
-		 "<a href='http://maverick.inria.fr/~Romain.Vergne/'>Romain Vergne</a> "
+  QString h = tr("<center><font size='12'> BICHMOUTE (VERSION 1.0)</font></center><br>"
+		 "Description :<br> This small application allows you to animate amazing stuff thanks to our incredible work !<br>"
+		 "Copyright (C) 2017. <br>"
+		 "<br>"
+		 "<a href='http://maverick.inria.fr/~Romain.Vergne/'>Romain Vergne</a>  <br>"
 		 "( <a href='mailto:romain.couderc@grenoble-inp.org'>romain.couderc@grenoble-inp.org</a> ) <br>"
-		 "( <a href='mailto:theo.lambert@grenoble-inp.org' >theo.lambert@grenoble-inp.org <br>"
-		 "( <a href='mailto:theo.moins@grenoble-inp.org' >theo.moins@grenoble-inp.org <br>"
- 		 "( <a href='mailto:william.didier@grenoble-inp.org' >william.didier@grenoble-inp.org <br>"
+		 "( <a href='mailto:theo.lambert@grenoble-inp.org' >theo.lambert@grenoble-inp.org )<br>"
+		 "( <a href='mailto:theo.moins@grenoble-inp.org' >theo.moins@grenoble-inp.org )<br>"
+ 		 "( <a href='mailto:william.didier@grenoble-inp.org' >william.didier@grenoble-inp.org )<br>"
 		 );
 		 
   QMessageBox::about(this,"About",h);
