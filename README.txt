@@ -58,7 +58,7 @@ edit main.pro:
      Note: if you created an associated .cpp file, you have to add it to SOURCES as well
 edit scene.cpp:
      add the line #include "curve1DBlabla.h" at the begining of the file
-     add the line initFunctionBuilders(new Curve1DBlablaConstructor()); in the function initFunctionBuilders()
+     add the line addFunctionBuilder(new Curve1DBlablaConstructor()); in the function initFunctionBuilders()
 recompile and run!
 
 

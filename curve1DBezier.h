@@ -1,12 +1,33 @@
-#ifndef CURVE_1D_LINEAR_H
-#define CURVE_1D_LINEAR_H
+#ifndef CURVE_1D_BEZIER_H
+#define CURVE_1D_BEZIER_H
 
 #include "curve1D.h"
 
-class Curve1DLinear : public Curve1D {
+
+class Curve1DBezier : public Curve1D {
  public:
- Curve1DLinear(const QString &name) : Curve1D(name) {}
- Curve1DLinear(Curve1D *curve,const QString &name) : Curve1D(curve,name) {}
+ Curve1DBezier(const QString &name) : Curve1D(name) {}
+ Curve1DBezier(Curve1D *curve,const QString &name) : Curve1D(curve,name) {}
+
+ Vector2f Casteljau2D(int i, int j, float t){
+   // Returns the i-th point at the j-th iteration of the algorithm//
+
+   if (j == 0){
+
+     return _points[i];
+
+   } else {
+
+     Vector2f a = Casteljau2D(i, j-1, t);
+     Vector2f b = Casteljau2D(i+1, j-1, t);
+
+     Vector2f resu;
+     resu[0] = (1-t)*a[0] + t*b[0];
+     resu[1] = (1-t)*a[1] + t*b[1];
+
+     return resu;
+   }
+ }
 
   QPainterPath path(float xmin,float xmax) {
     QPainterPath p;
@@ -14,7 +35,7 @@ class Curve1DLinear : public Curve1D {
     // empty test
     if(empty())
       return p;
- evalAnimPt(get(i), frame
+
     // left part
     if(xmin<_points[0][0]) {
       p.moveTo(xmin,_points[0][1]);
@@ -22,11 +43,12 @@ class Curve1DLinear : public Curve1D {
     } else {
       p.moveTo(_points[0][0],_points[0][1]);
     }
- evalAnimPt(get(i), frame
+
     // draw function
-    for(unsigned int i=1;i<nbPts();++i) {
-      p.lineTo(_points[i][0],_points[i][1]);
-    }
+    uint N = 500;
+      for (unsigned int i = 0; i < N; i++){
+        p.lineTo(Casteljau2D(0, nbPts()-1, (float) i/N)[0], Casteljau2D(0, nbPts()-1, (float) i/N)[1]);
+      }
 
     // right part
     if(xmax>_points[nbPts()-1][0]) {
@@ -36,15 +58,15 @@ class Curve1DLinear : public Curve1D {
     return p;
   }
 
-  float Casteljau (int i, int j, float x){
-    if (j == 0){
 
+  float Casteljau1D (int i, int j, float x){
+    if (j == 0){
       return _points[i][1];
 
     } else {
 
-      float a = Casteljau(i,j-1,x);
-      float b = Casteljau(i-1,j-1,x);
+      float a = Casteljau1D(i,j-1,x);
+      float b = Casteljau1D(i-1,j-1,x);
 
       float resu = (1-x)*a + x*b;
       return resu;
@@ -60,7 +82,7 @@ class Curve1DLinear : public Curve1D {
     // Bezier Curve
     for(unsigned int i=0;i<nbPts()-1;++i) {
       if(_points[i+1][0]>=x) {
-        return Casteljau(0, nbPts()-1, x)
+        return Casteljau1D(0, nbPts()-1, x);
       }
     }
 
@@ -69,13 +91,13 @@ class Curve1DLinear : public Curve1D {
 };
 
 
-class Curve1DLinearConstructor : public Curve1DConstructor {
+class Curve1DBezierConstructor : public Curve1DConstructor {
  public:
-  virtual ~Curve1DLinearConstructor()                     {}
-  virtual const QString type() const                      { return "LinearCurve";             }
-  virtual Curve1D *create(const QString &name)            { return new Curve1DLinear(name);   }
-  virtual Curve1D *create(Curve1D *c,const QString &name) { return new Curve1DLinear(c,name); }
+  virtual ~Curve1DBezierConstructor()                     {}
+  virtual const QString type() const                      { return "BezierCurve";             }
+  virtual Curve1D *create(const QString &name)            { return new Curve1DBezier(name);   }
+  virtual Curve1D *create(Curve1D *c,const QString &name) { return new Curve1DBezier(c,name); }
 };
 
 
-#endif // CURVE_1D_LINEAR_H
+#endif // CURVE_1D_Bezier_H
