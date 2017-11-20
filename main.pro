@@ -1,5 +1,5 @@
 # define your application name here
-TARGET = yourAppName
+TARGET = bichmoute
 
 # add your source cpp files here
 SOURCES += \
@@ -26,6 +26,7 @@ HEADERS += \
     curve2D.h \
     curve1DLinear.h \
     curve2DLinear.h \
+    curve1DBezier.h \
     curve2DBezier.h \
     animatedPoint.h
 

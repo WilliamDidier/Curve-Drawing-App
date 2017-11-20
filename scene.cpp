@@ -1,6 +1,7 @@
 #include "scene.h"
 
 // add all your types of 2D curves here
+#include "curve1DBezier.h"
 #include "curve2DBezier.h"
 #include "curve2DLinear.h"
 #include "curve1DLinear.h"
@@ -22,6 +23,7 @@ void Scene::initCurveBuilders() {
 // add 1D curve builders (functions) here
 void Scene::initFunctionBuilders() {
   addFunctionBuilder(new Curve1DLinearConstructor());
+  addFunctionBuilder(new Curve1DBezierConstructor());
 }
 
 
