@@ -1,7 +1,7 @@
-# define your application name here 
+# define your application name here
 TARGET = yourAppName
 
-# add your source cpp files here 
+# add your source cpp files here
 SOURCES += \
     main.cpp \
     mainWidget.cpp \
@@ -11,7 +11,7 @@ SOURCES += \
     animationWidgetItems.cpp \
     animationWidget.cpp \
     scene.cpp \
-    animatedPoint.cpp 
+    animatedPoint.cpp
 
 # add your header files here
 HEADERS += \
@@ -26,7 +26,8 @@ HEADERS += \
     curve2D.h \
     curve1DLinear.h \
     curve2DLinear.h \
-    animatedPoint.h 
+    curve2DBezier.h \
+    animatedPoint.h
 
 TEMPLATE = app
 
