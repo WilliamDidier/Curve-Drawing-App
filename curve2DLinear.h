@@ -1,12 +1,12 @@
-#ifndef CURVE_2D_LINEAR_H
-#define CURVE_2D_LINEAR_H
+#ifndef CURVE_2D_BEZIERS_H
+#define CURVE_2D_BEZIERS_H
 
 #include "curve2D.h"
 
-class Curve2DLinear : public Curve2D {
+class Curve2DBeziers : public Curve2D {
  public:
- Curve2DLinear(const QString &name) : Curve2D(name) {}
- Curve2DLinear(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
+ Curve2DBeziers(const QString &name) : Curve2D(name) {}
+ Curve2DBeziers(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
   
   QPainterPath path(float frame) {
     QPainterPath p;
