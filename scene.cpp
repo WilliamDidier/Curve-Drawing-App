@@ -7,6 +7,7 @@
 #include "curve1DLinear.h"
 #include "curve_2D_lagrange.h"
 
+
 Scene *Scene::_instance = NULL;
 
 using namespace std;
@@ -15,7 +16,7 @@ using namespace std;
 void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DLinearConstructor());
 
-  //addCurveBuilder(new Curve2DlagrangeConstructor());
+  addCurveBuilder(new Curve2DlagrangeConstructor());
   addCurveBuilder(new Curve2DBezierConstructor());
 
 }

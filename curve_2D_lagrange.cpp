@@ -1,8 +1,12 @@
 #include "curve_2D_lagrange.h"
 #include <vector>
+#include <cstdlib>
 
-"""
-float lagrange_newton( vector<float> A, vector<float> X, float x){
+#include <iostream>
+
+using namespace std;
+
+float Curve2Dlagrange::lagrange_newton( vector<float> A, vector<float> X, float x){
 	float result = 0;
 	float product = 1;
 	int size = A.size();
@@ -16,49 +20,61 @@ float lagrange_newton( vector<float> A, vector<float> X, float x){
 
 }
 
-vector<float> coef_newton( vector<float> X, vector<float> F ){
+vector<float> Curve2Dlagrange::coef_newton(float frame){
+	vector<float> X;
+	vector<float> F;
+	for(uint idx = 0; idx < nbPts(); idx++){
+		Vector2f pt = evalAnimPt(get(idx), frame);
+		X.push_back(pt[0]);
+		F.push_back(pt[1]);
+	}
 	vector<float> coef ;
 	coef = F;
-	for( int idx = 0; idx<X.size(); idx++){
+	for(uint idx = 0; idx < nbPts(); idx++){
 		vector<float> coef_bis;
 		coef_bis = coef;
-		for( int idx2 = idx + 1; idx2 < X.size(), idx++){
-			coef[idx2] = (coef2[idx2]-coef2[idx2-1])/(X[idx2]-X[idx2-idx-1])
+		for(uint idx2 = idx + 1; idx2 < nbPts(); idx2++){
+			coef[idx2] = (coef_bis[idx2]-coef_bis[idx2-1])/(X[idx2]-X[idx2-idx-1]);
 		}
-
 	}
 	return coef;
 }
 
-float lagrange_polynomial(vector<float> X, vector<float> F, float x){
-	float lagX = lagrange_newton(coef_newton(X,F), X, x);
+float Curve2Dlagrange::lagrange_polynomial(float frame, float x){
+	vector<float> X;
+	for(uint idx = 0; idx < nbPts(); idx++){
+		Vector2f pt = evalAnimPt(get(idx), frame);
+		X.push_back(pt[0]);
+	}
+	float lagX = lagrange_newton(coef_newton(frame), X, x);
 	return lagX;
 }
 
-float quadra(float x){
-	y = pow(x,2);
-	return y ;
-}
-
-
-
-curve2Dlagrange::QPainterPath path(float frame) {
+QPainterPath Curve2Dlagrange::path(float frame) {
     QPainterPath p;
-    if(nbPts()==0) 
+    if(nbPts()==0)
       return p;
 
-    Vector2f pt = evalAnimPt(get(0),frame);
+		Vector2f pt = evalAnimPt(get(0),frame);
+		p.moveTo(pt[0],pt[1]);
 
-    p.moveTo(pt[0],pt[1]);
-    for(unsigned int i=1;i<nbPts();++i) {
-      	pt = evalAnimPt(get(i),frame);
-      	Vector2f pt_suiv = evalAnimPt(get(0), frame);
-    	float dist_x = pt_suiv[0]-pt[0];
-    	float step = dist_x/100 ; 
+		float min = pt[0];
+		float max = pt[0];
 
-     	p.lineTo(pt[0],pt[1]);
+		for (unsigned int i = 1; i<nbPts(); i++){
+			pt = evalAnimPt(get(i), frame);
+			if (min > pt[0]){
+				min = pt[0];
+			} else if (max < pt[0]){
+				max = pt[0];
+			}
+		}
+
+		uint N = 500;
+
+    for(unsigned int i = 0; i < N+1; ++i) {
+			cout << (max-min)*i/N << " , " << lagrange_polynomial(frame, (float) (max-min)*i/N) << endl;
+     	p.lineTo((float) min+(max-min)*i/N, lagrange_polynomial(frame, (float) min+(max-min)*i/N));
     }
     return p;
   }
-  """
-
