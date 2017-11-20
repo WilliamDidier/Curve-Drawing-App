@@ -14,7 +14,7 @@ class Curve1DLinear : public Curve1D {
     // empty test
     if(empty())
       return p;
-
+ evalAnimPt(get(i), frame
     // left part
     if(xmin<_points[0][0]) {
       p.moveTo(xmin,_points[0][1]);
@@ -22,7 +22,7 @@ class Curve1DLinear : public Curve1D {
     } else {
       p.moveTo(_points[0][0],_points[0][1]);
     }
-
+ evalAnimPt(get(i), frame
     // draw function
     for(unsigned int i=1;i<nbPts();++i) {
       p.lineTo(_points[i][0],_points[i][1]);
@@ -36,19 +36,34 @@ class Curve1DLinear : public Curve1D {
     return p;
   }
 
+  float Casteljau (int i, int j, float x){
+    if (j == 0){
+
+      return _points[i][1];
+
+    } else {
+
+      float a = Casteljau(i,j-1,x);
+      float b = Casteljau(i-1,j-1,x);
+
+      float resu = (1-x)*a + x*b;
+      return resu;
+    }
+  }
+
   float evalAt(float x) {
     // special cases
     if(empty()) return 0.0f;
     if(x<=_points[0][0]) return _points[0][1];
     if(x>=_points[nbPts()-1][0]) return _points[nbPts()-1][1];
 
-    // linear interp
+    // Bezier Curve
     for(unsigned int i=0;i<nbPts()-1;++i) {
       if(_points[i+1][0]>=x) {
-	       return _points[i][1]+(_points[i+1][1]-_points[i][1])*
-	        ((x-_points[i][0])/(_points[i+1][0]-_points[i][0]));
+        return Casteljau(0, nbPts()-1, x)
       }
     }
+
     return _points[0][1];
   }
 };

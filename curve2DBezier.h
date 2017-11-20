@@ -8,6 +8,7 @@ class Curve2DBezier : public Curve2D {
 private:
 
 Vector2f pij(int i, int j, float t, float frame){
+  // Returns the i-th point at the j-th iteration of the algorithm//
 
   if (j == 0){
 
@@ -16,7 +17,7 @@ Vector2f pij(int i, int j, float t, float frame){
   } else {
 
     Vector2f a = pij(i, j-1, t, frame);
-    Vector2f b = pij(i+1, j-1, t, frame);  
+    Vector2f b = pij(i+1, j-1, t, frame);
 
     Vector2f resu;
     resu[0] = (1-t)*a[0] + t*b[0];
@@ -30,10 +31,10 @@ Vector2f pij(int i, int j, float t, float frame){
 public:
 Curve2DBezier(const QString &name) : Curve2D(name) {}
 Curve2DBezier(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
-  
+
   QPainterPath path(float frame) {
     QPainterPath p;
-    if(nbPts()==0) 
+    if(nbPts()==0)
       return p;
 
     Vector2f pt = evalAnimPt(get(0),frame);
