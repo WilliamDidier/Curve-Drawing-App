@@ -30,6 +30,7 @@ class Curve1DBezier : public Curve1D {
  }
 
   QPainterPath path(float xmin,float xmax) {
+	/*La fonction  qui trace les courbes roses et violettes : elle peut appeler evalAt*/
     QPainterPath p;
 
     // empty test
@@ -74,6 +75,8 @@ class Curve1DBezier : public Curve1D {
   }
 
   float evalAt(float x) {
+  	/*La fonction appelée par evalAnimPt dans le cas 2D. 
+  	Elle renvoie la coordonée y d'un point d'une courbe en x*/
     // special cases
     if(empty()) return 0.0f;
     if(x<=_points[0][0]) return _points[0][1];
@@ -82,7 +85,8 @@ class Curve1DBezier : public Curve1D {
     // Bezier Curve
     for(unsigned int i=0;i<nbPts()-1;++i) {
       if(_points[i+1][0]>=x) {
-        return Casteljau1D(0, nbPts()-1, x);
+      	float t = (x - _points[i][0])/(_points[i+1][0]-_points[i][0]);
+        return Casteljau2D(0, nbPts()-1, t)[1];
       }
     }
 
