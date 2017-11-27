@@ -73,7 +73,6 @@ QPainterPath Curve2Dlagrange::path(float frame) {
 		uint N = 500;
 
     for(unsigned int i = 0; i < N+1; ++i) {
-			cout << (max-min)*i/N << " , " << lagrange_polynomial(frame, (float) (max-min)*i/N) << endl;
      	p.lineTo((float) min+(max-min)*i/N, lagrange_polynomial(frame, (float) min+(max-min)*i/N));
     }
     return p;
