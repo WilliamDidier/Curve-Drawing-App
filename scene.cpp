@@ -6,6 +6,7 @@
 #include "curve2DLinear.h"
 #include "curve1DLinear.h"
 #include "curve_2D_lagrange.h"
+#include "curve2DBsplines.h"
 
 
 Scene *Scene::_instance = NULL;
@@ -18,6 +19,7 @@ void Scene::initCurveBuilders() {
 
   addCurveBuilder(new Curve2DlagrangeConstructor());
   addCurveBuilder(new Curve2DBezierConstructor());
+  addCurveBuilder(new Curve2DBsplinesConstructor());
 
 }
 

@@ -22,7 +22,7 @@ float Curve2Dlagrange::lagrange_newton( vector<float> A, vector<float> X, float 
 
 vector<float> Curve2Dlagrange::coef_newton(float frame){
 	vector<float> X;
-	vector<float> F;
+	vector<float> F;      cout << de_boor(D, k, t, deg, tab)[0] << endl;
 	for(uint idx = 0; idx < nbPts(); idx++){
 		Vector2f pt = evalAnimPt(get(idx), frame);
 		X.push_back(pt[0]);
@@ -73,7 +73,6 @@ QPainterPath Curve2Dlagrange::path(float frame) {
 		uint N = 500;
 
     for(unsigned int i = 0; i < N+1; ++i) {
-			cout << (max-min)*i/N << " , " << lagrange_polynomial(frame, (float) (max-min)*i/N) << endl;
      	p.lineTo((float) min+(max-min)*i/N, lagrange_polynomial(frame, (float) min+(max-min)*i/N));
     }
     return p;
