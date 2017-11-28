@@ -90,7 +90,7 @@ class Curve1DBezier : public Curve1D {
       }
     }
 
-    return _points[0][1];
+    return _points[0][1];   
   }
 };
 
