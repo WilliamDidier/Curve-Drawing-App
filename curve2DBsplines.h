@@ -66,7 +66,7 @@ Curve2DBsplines(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
 
     p.moveTo(D[0][0],D[0][1]);
     uint N = 300;
-    for (unsigned int i = 40 i < N; i++){
+    for (unsigned int i = 4; i < N; i++){
       float t = float(i)/N;
       int k = find_index(tab, t);
       p.lineTo(de_boor(D, k, t, deg, tab)[0],de_boor(D, k, t, deg, tab)[1] );

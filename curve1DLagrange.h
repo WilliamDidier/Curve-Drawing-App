@@ -7,8 +7,8 @@ class Curve1DLagrange : public Curve1D {
  public:
  Curve1DLagrange(const QString &name) : Curve1D(name) {}
  Curve1DLagrange(Curve1D *curve,const QString &name) : Curve1D(curve,name) {}
-  
-  float Curve2Dlagrange::lagrange_newton( vector<float> A, vector<float> X, float x){
+
+  float lagrange_newton( vector<float> A, vector<float> X, float x){
   float result = 0;
   float product = 1;
   int size = A.size();
@@ -22,9 +22,9 @@ class Curve1DLagrange : public Curve1D {
 
 }
 
-vector<float> Curve2Dlagrange::coef_newton(){
+vector<float> coef_newton(){
   vector<float> X;
-  vector<float> F;      
+  vector<float> F;
   for(uint idx = 0; idx < nbPts(); idx++){
     X.push_back(_points[idx][0]);
     F.push_back(_points[idx][1]);
@@ -41,7 +41,7 @@ vector<float> Curve2Dlagrange::coef_newton(){
   return coef;
 }
 
-float Curve2Dlagrange::lagrange_polynomial(float x){
+float lagrange_polynomial(float x){
   vector<float> X;
   for(uint idx = 0; idx < nbPts(); idx++){
     X.push_back(_points[idx][0]);
@@ -54,11 +54,11 @@ float Curve2Dlagrange::lagrange_polynomial(float x){
   QPainterPath path(float xmin,float xmax) {
     QPainterPath p;
 
-    // empty test 
-    if(empty()) 
+    // empty test
+    if(empty())
       return p;
 
-    // left part 
+    // left part
     if(xmin<_points[0][0]) {
       p.moveTo(xmin,_points[0][1]);
       p.lineTo(_points[0][0],_points[0][1]);
@@ -66,7 +66,7 @@ float Curve2Dlagrange::lagrange_polynomial(float x){
       p.moveTo(_points[0][0],_points[0][1]);
     }
 
-    // draw function 
+    // draw function
     float min = _points[0][0];
     float max = _points[0][0];
 
@@ -85,7 +85,7 @@ float Curve2Dlagrange::lagrange_polynomial(float x){
     }
     return p;
 
-    // right part 
+    // right part
     if(xmax>_points[nbPts()-1][0]) {
       p.lineTo(xmax,_points[nbPts()-1][1]);
     }
@@ -94,7 +94,7 @@ float Curve2Dlagrange::lagrange_polynomial(float x){
   }
 
   float evalAt(float x) {
-    // special cases 
+    // special cases
     if(empty()) return 0.0f;
     if(x<=_points[0][0]) return _points[0][1];
     if(x>=_points[nbPts()-1][0]) return _points[nbPts()-1][1];
