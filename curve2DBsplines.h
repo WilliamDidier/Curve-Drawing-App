@@ -49,7 +49,7 @@ Curve2DBsplines(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
       return p;
     }
     p.moveTo(evalAnimPt(get(0),frame)[0],evalAnimPt(get(0),frame)[1]);
-    unsigned int deg = 3;
+    unsigned int deg = 2;
     vector<float> tab;
     for (unsigned int i = 0; i < nbPts() + deg; i++){
       if( i <= deg ){

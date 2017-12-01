@@ -25,6 +25,7 @@ HEADERS += \
     scene.h \
     curve1D.h \
     curve1DHermite.h \
+    curve2DBsplines.h\
     curve2D.h \
     curve1DLinear.h \
     curve2DLinear.h \

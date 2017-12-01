@@ -62,7 +62,7 @@ class Curve1DBezier : public Curve1D {
 
 
   float evalAt(float x) {
-  	/*La fonction appelée par evalAnimPt dans le cas 2D. 
+  	/*La fonction appelée par evalAnimPt dans le cas 2D.
   	Elle renvoie la coordonée y d'un point d'une courbe en x*/
     // special cases
     if(empty()) return 0.0f;
@@ -83,14 +83,7 @@ class Curve1DBezier : public Curve1D {
   }
 };
 
-/*
-    for(unsigned int i=0;i<nbPts()-1;++i) {
-      if(_points[i+1][0]>=x) {
-        float t = (x - _points[i][0])/(_points[i+1][0]-_points[i][0]);
-        return Casteljau2D(0, nbPts()-1, t)[1];
-      }
-    }
-*/
+
 
 class Curve1DBezierConstructor : public Curve1DConstructor {
  public:

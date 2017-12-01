@@ -2,6 +2,10 @@
 #define CURVE_1D_LAGRANGE_H
 
 #include "curve1D.h"
+#include <vector>
+#include <cstdlib>
+#include <iostream>
+using namespace std;
 
 class Curve1DLagrange : public Curve1D {
  public:
