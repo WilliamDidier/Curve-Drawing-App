@@ -31,6 +31,7 @@ HEADERS += \
     curve1DBezier.h \
     curve2DBezier.h \
     curve_2D_lagrange.h \
+    curve1DLagrange.h \
     # Curve2DBsplines.h \
     animatedPoint.h
 

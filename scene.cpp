@@ -5,6 +5,7 @@
 #include "curve2DBezier.h"
 #include "curve2DLinear.h"
 #include "curve1DLinear.h"
+#include "curve1DLagrange.h"
 #include "curve_2D_lagrange.h"
 //#include "curve2DBsplines.h"
 #include "curve1DHermite.h"
@@ -26,6 +27,7 @@ void Scene::initCurveBuilders() {
 
 // add 1D curve builders (functions) here
 void Scene::initFunctionBuilders() {
+  addFunctionBuilder(new Curve1DLagrangeConstructor());
   addFunctionBuilder(new Curve1DHermiteConstructor());
   addFunctionBuilder(new Curve1DLinearConstructor());
   addFunctionBuilder(new Curve1DBezierConstructor());
