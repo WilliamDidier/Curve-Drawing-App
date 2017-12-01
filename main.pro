@@ -33,12 +33,13 @@ HEADERS += \
     curve_2D_lagrange.h \
     curve1DLagrange.h \
     curve2DBsplines.h \
+    Curve2DHermite.h\
     animatedPoint.h
 
 TEMPLATE = app
 
 INCLUDEPATH += eigen
 
-QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-deprecated-declarations
+QMAKE_CXXFLAGS += -std=c++11 -g -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-deprecated-declarations
 
 QT += core gui widgets

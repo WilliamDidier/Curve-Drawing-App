@@ -9,6 +9,7 @@
 #include "curve2DBsplines.h"
 #include "curve1DHermite.h"
 #include "curve1DLagrange.h"
+#include "curve2Dhermite.h"
 
 
 
@@ -22,6 +23,8 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DlagrangeConstructor());
   addCurveBuilder(new Curve2DBezierConstructor());
   addCurveBuilder(new Curve2DBsplinesConstructor());
+  addCurveBuilder(new Curve2DHermiteConstructor());
+
 
 }
 
