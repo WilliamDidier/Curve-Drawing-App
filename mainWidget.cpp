@@ -40,16 +40,16 @@ MainWindow::MainWindow()
    sp1->setStretchFactor(1,10);
    sp2->setStretchFactor(0,8);
    sp2->setStretchFactor(1,1);
-   
+
   connect(_timer,SIGNAL(timeout()),this,SLOT(timerEvent()));
 
    setCentralWidget(sp1);
-   
+
    setCurrentFile("");
 }
 
 MainWindow::~MainWindow() {
-  // delete widgets here 
+  // delete widgets here
 }
 
 void MainWindow::timerEvent() {
@@ -163,7 +163,7 @@ void MainWindow::createMenus() {
   _fileMenu->addAction(_saveAct);
   _fileMenu->addSeparator();
   _fileMenu->addAction(_exitAct);
-  
+
   _editMenu = menuBar()->addMenu(tr("&Edit"));
   _editMenu->addAction(_copyAct);
   _editMenu->addAction(_pasteAct);
@@ -212,7 +212,7 @@ bool MainWindow::saveAs() {
 }
 
 void MainWindow::copy() {
-  cout << __FILE__ << " - " << __FUNCTION__ << ": TODO!" << endl;  
+  cout << __FILE__ << " - " << __FUNCTION__ << ": TODO!" << endl;
 }
 
 void MainWindow::paste() {
@@ -238,7 +238,7 @@ void MainWindow::about() {
 		 "( <a href='mailto:theo.moins@grenoble-inp.org' >theo.moins@grenoble-inp.org )<br>"
  		 "( <a href='mailto:william.didier@grenoble-inp.org' >william.didier@grenoble-inp.org )<br>"
 		 );
-		 
+
   QMessageBox::about(this,"About",h);
 }
 
@@ -288,7 +288,7 @@ bool MainWindow::maybeSave() {
 }
 
 void MainWindow::clearAll() {
-  cout << __FILE__ << " - " << __FUNCTION__ << ": TODO!" << endl;
+  cout << __FILE__ << " - " << __FUNCTION__ << ": DONE" << endl;
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
