@@ -28,8 +28,10 @@ HEADERS += \
     curve2D.h \
     curve1DLinear.h \
     curve2DLinear.h \
+    curve2DLinearclosed.h \
     curve1DBezier.h \
     curve2DBezier.h \
+    Curve2DBezierClosed.h \
     curve_2D_lagrange.h \
     curve1DLagrange.h \
     curve2DBsplines.h \
