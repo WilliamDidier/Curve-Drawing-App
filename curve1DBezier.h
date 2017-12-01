@@ -60,19 +60,6 @@ class Curve1DBezier : public Curve1D {
   }
 
 
-  float Casteljau1D (int i, int j, float x){
-    if (j == 0){
-      return _points[i][1];
-
-    } else {
-
-      float a = Casteljau1D(i,j-1,x);
-      float b = Casteljau1D(i-1,j-1,x);
-
-      float resu = (1-x)*a + x*b;
-      return resu;
-    }
-  }
 
   float evalAt(float x) {
   	/*La fonction appelée par evalAnimPt dans le cas 2D. 
@@ -82,18 +69,28 @@ class Curve1DBezier : public Curve1D {
     if(x<=_points[0][0]) return _points[0][1];
     if(x>=_points[nbPts()-1][0]) return _points[nbPts()-1][1];
 
-    // Bezier Curve
-    for(unsigned int i=0;i<nbPts()-1;++i) {
-      if(_points[i+1][0]>=x) {
-      	float t = (x - _points[i][0])/(_points[i+1][0]-_points[i][0]);
-        return Casteljau2D(0, nbPts()-1, t)[1];
-      }
+    uint N = 500;
+    float ab = Casteljau2D(0, nbPts()-1, 0)[0];
+    int j = 0;
+    for (unsigned int i = 1; i < N; i++){
+        float ab_tmp = Casteljau2D(0, nbPts()-1, (float) i/N)[0];
+        if (abs(ab_tmp-x) < abs(ab-x)){
+            ab = ab_tmp;
+            j = i;
+        }
     }
-
-    return _points[0][1];   
+    return Casteljau2D(0, nbPts()-1, (float) j/N)[1];
   }
 };
 
+/*
+    for(unsigned int i=0;i<nbPts()-1;++i) {
+      if(_points[i+1][0]>=x) {
+        float t = (x - _points[i][0])/(_points[i+1][0]-_points[i][0]);
+        return Casteljau2D(0, nbPts()-1, t)[1];
+      }
+    }
+*/
 
 class Curve1DBezierConstructor : public Curve1DConstructor {
  public:
