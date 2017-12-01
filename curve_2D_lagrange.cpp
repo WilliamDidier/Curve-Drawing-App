@@ -22,7 +22,7 @@ float Curve2Dlagrange::lagrange_newton( vector<float> A, vector<float> X, float 
 
 vector<float> Curve2Dlagrange::coef_newton(float frame){
 	vector<float> X;
-	vector<float> F;      
+	vector<float> F;
 	for(uint idx = 0; idx < nbPts(); idx++){
 		Vector2f pt = evalAnimPt(get(idx), frame);
 		X.push_back(pt[0]);

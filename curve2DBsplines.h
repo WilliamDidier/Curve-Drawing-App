@@ -79,7 +79,7 @@ Curve2DBsplines(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
 class Curve2DBsplinesConstructor : public Curve2DConstructor {
  public:
   virtual ~Curve2DBsplinesConstructor()                     {}
-  virtual const QString type() const                      { return "Bsplinescurve";             }
+  virtual const QString type() const                      { return "B-spline";             }
   virtual Curve2D *create(const QString &name)            { return new Curve2DBsplines(name);   }
   virtual Curve2D *create(Curve2D *c,const QString &name) { return new Curve2DBsplines(c,name); }
 };
