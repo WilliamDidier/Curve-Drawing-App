@@ -1,6 +1,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGroupBox>
+#include <QString>
 #include <vector>
 
 #include <iostream>
@@ -17,18 +18,18 @@ const QColor ToolsWidget::_UNSELECTED_COLOR = QColor(150,150,150);
 ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   : QWidget(parent),
     _mainWindow(mainWindow) {
-  
+
   Scene *sce = Scene::get();
   QStringList ct = sce->curveTypes();
   QStringList cf = sce->functionTypes();
-  
+
   QHBoxLayout *hl;
   QVBoxLayout *vl;
   QLabel *label;
   QVBoxLayout *l = new QVBoxLayout();
-  
 
-  // box for scene 
+
+  // box for scene
   _sceneBox = new QGroupBox("Scene");
   vl = new QVBoxLayout();
   hl = new QHBoxLayout();
@@ -64,7 +65,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
 
 
 
-  // box for tools 
+  // box for tools
   _toolBox = new QGroupBox("Tools");
   _createButton = new QPushButton("Create");
   _createButton->setAutoFillBackground(true);
@@ -81,7 +82,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   _toolBox->setLayout(vl);
   l->addWidget(_toolBox);
 
-  // box for edit modes 
+  // box for edit modes
   _editBox = new QGroupBox("Options");
   label = new QLabel("Edit:");
   _addPtBefore = new QPushButton("Add <-");
@@ -100,7 +101,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   _editBox->setLayout(vl);
   l->addWidget(_editBox);
 
-  // box for style 
+  // box for style
   _styleBox = new QGroupBox("Style");
   label = new QLabel("Pen Color");
   _penColor = new QPushButton();
@@ -134,7 +135,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   _brushColorPicker = new QColorDialog(this);
   _brushColorPicker->setOptions(QColorDialog::ShowAlphaChannel);
   _brushColorPicker->setHidden(true);
-  
+
   // box for animation
   _animBox = new QGroupBox("Animation");
   vl = new QVBoxLayout();
@@ -204,7 +205,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   vl->addItem(hl);
   _keyframing->setLayout(vl);
   l->addWidget(_keyframing);
-  
+
   initTools();
 
   connect(_createButton,SIGNAL(clicked()),this,SLOT(createButtonClicked()));
@@ -235,12 +236,12 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   connect(_kfNextPt,SIGNAL(clicked()),this,SLOT(kfNextPtClicked()));
   connect(_kfPrevPt,SIGNAL(clicked()),this,SLOT(kfPrevPtClicked()));
   connect(_kfApplyType,SIGNAL(clicked()),this,SLOT(kfApplyTypeClicked()));
-  
+
   setLayout(l);
 }
 
 ToolsWidget::~ToolsWidget() {
-  
+
 }
 
 void ToolsWidget::createButtonClicked() {
@@ -251,7 +252,7 @@ void ToolsWidget::createButtonClicked() {
 
   setButtonColor(_createButton,_SELECTED_COLOR);
   setButtonColor(_editButton,_UNSELECTED_COLOR);
-  
+
   sce->setSelectedCurve(-1);
   sce->setSelectedPoints(vector<int>());
   sce->setCurrentTool(Scene::CREATE_CURVE);
@@ -266,7 +267,7 @@ void ToolsWidget::editButtonClicked() {
     return;
 
   sce->setSelectedCurve((int)sce->nbCurves()-1);
-  
+
   setButtonColor(_createButton,_UNSELECTED_COLOR);
   setButtonColor(_editButton,_SELECTED_COLOR);
   sce->setCurrentTool(Scene::EDIT_CURVE);
@@ -312,7 +313,7 @@ void ToolsWidget::penColorChanged(const QColor &col) {
 
 void ToolsWidget::brushColorChanged(const QColor &col) {
   Scene *sce = Scene::get();
-  
+
   sce->setCurrentBrushColor(col);
   setButtonColor(_brushColor,col);
 
@@ -324,8 +325,8 @@ void ToolsWidget::brushColorChanged(const QColor &col) {
 
 void ToolsWidget::playClicked() {
   Scene *sce = Scene::get();
-  
-  if(sce->isAnimated()) 
+
+  if(sce->isAnimated())
     return;
 
   setButtonColor(_play,_SELECTED_COLOR);
@@ -336,9 +337,9 @@ void ToolsWidget::playClicked() {
 void ToolsWidget::stopClicked() {
   Scene *sce = Scene::get();
 
-  if(!sce->isAnimated()) 
+  if(!sce->isAnimated())
     return;
-  
+
   setButtonColor(_play,_UNSELECTED_COLOR);
   setButtonColor(_stop,_SELECTED_COLOR);
   _mainWindow->stopAnimation();
@@ -347,7 +348,7 @@ void ToolsWidget::stopClicked() {
 void ToolsWidget::prevClicked() {
   Scene *sce = Scene::get();
 
-  if(sce->isAnimated() || sce->currentFrame()==0) 
+  if(sce->isAnimated() || sce->currentFrame()==0)
     return;
 
   sce->setCurrentFrame(sce->currentFrame()-1);
@@ -359,9 +360,9 @@ void ToolsWidget::prevClicked() {
 void ToolsWidget::nextClicked() {
   Scene *sce = Scene::get();
 
-  if(sce->isAnimated() || sce->currentFrame()==(sce->nbFrames()-1)) 
+  if(sce->isAnimated() || sce->currentFrame()==(sce->nbFrames()-1))
     return;
-  
+
   sce->setCurrentFrame(sce->currentFrame()+1);
   updateFrameNumber();
   _mainWindow->frameChanged();
@@ -373,7 +374,7 @@ void ToolsWidget::frameChanged(int f) {
 
   if(sce->isAnimated())
     return;
-  
+
   sce->setCurrentFrame(f);
   updateFrameNumber();
   _mainWindow->frameChanged();
@@ -509,7 +510,7 @@ void ToolsWidget::kfNextPtClicked() {
   Scene *sce = Scene::get();
   unsigned int f = sce->currentFrame();
   unsigned int t = f;
-  
+
   if(sce->isAnimated())
     return;
   switch(sce->currentKfMode()) {
@@ -537,10 +538,10 @@ void ToolsWidget::kfPrevPtClicked() {
   Scene *sce = Scene::get();
   if(sce->isAnimated())
     return;
-  
+
   unsigned int f = sce->currentFrame();
   unsigned int t = f;
-  
+
   if(sce->isAnimated())
     return;
   switch(sce->currentKfMode()) {
@@ -567,7 +568,7 @@ void ToolsWidget::kfPrevPtClicked() {
 void ToolsWidget::kfApplyTypeClicked() {
   Scene *sce = Scene::get();
   QString t = _kfType->currentText();
-  
+
   switch(sce->currentKfMode()) {
   case Scene::KF_MODE_PT:
     sce->setCurrentKfType(sce->selectedCurve(),sce->selectedPoint(),t);
@@ -595,11 +596,11 @@ void ToolsWidget::initTools() {
   setButtonColor(_editButton,_UNSELECTED_COLOR);
 
   switch(sce->currentTool()) {
-  case Scene::EDIT_CURVE: 
+  case Scene::EDIT_CURVE:
     setButtonColor(_editButton,_SELECTED_COLOR);
     break;
-  case Scene::CREATE_CURVE: 
-  default: 
+  case Scene::CREATE_CURVE:
+  default:
     setButtonColor(_createButton,_SELECTED_COLOR);
     Scene::get()->setSelectedCurve(-1);
     Scene::get()->setSelectedPoints(vector<int>());
@@ -611,14 +612,14 @@ void ToolsWidget::initTools() {
   setButtonColor(_delPt,_UNSELECTED_COLOR);
 
   switch(sce->editMode()) {
-  case Scene::EDIT_ADD_AFTER: 
+  case Scene::EDIT_ADD_AFTER:
     setButtonColor(_addPtAfter,_SELECTED_COLOR);
     break;
-  case Scene::EDIT_DEL_PT: 
+  case Scene::EDIT_DEL_PT:
     setButtonColor(_delPt,_SELECTED_COLOR);
     break;
-  case Scene::EDIT_ADD_BEFORE: 
-  default: 
+  case Scene::EDIT_ADD_BEFORE:
+  default:
     setButtonColor(_addPtBefore,_SELECTED_COLOR);
     break;
   }
@@ -629,7 +630,7 @@ void ToolsWidget::initTools() {
 
   setButtonColor(_next,_UNSELECTED_COLOR);
   setButtonColor(_prev,_UNSELECTED_COLOR);
-  
+
   if(sce->isAnimated()) {
     setButtonColor(_play,_SELECTED_COLOR);
     setButtonColor(_stop,_UNSELECTED_COLOR);

@@ -7,10 +7,14 @@ class Curve2DBezierClosed : public Curve2D {
 
 private:
 
-Vector2f pij(int i, int j, float t, float frame){
+Vector2f pij(uint i, uint j, float t, float frame){
   // Returns the i-th point at the j-th iteration of the algorithm//
 
   if (j == 0){
+
+    if (i == nbPts()){
+      return evalAnimPt(get(0), frame);
+    }
 
     return evalAnimPt(get(i), frame);
 
@@ -44,9 +48,8 @@ Curve2DBezierClosed(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
 
     uint N = 500;
       for (unsigned int i = 0; i < N; i++){
-        p.lineTo(pij(0, nbPts()-1, (float) i/N, frame)[0], pij(0, nbPts()-1, (float) i/N, frame)[1]);
+        p.lineTo(pij(0, nbPts(), (float) i/N, frame)[0], pij(0, nbPts(), (float) i/N, frame)[1]);
       }
-      p.lineTo(pt0[0],pt0[1]);
     return p;
   }
 };
