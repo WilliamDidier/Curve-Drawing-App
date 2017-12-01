@@ -22,7 +22,7 @@ Vector2f de_boor( vector<Vector2f> D, int k, float t, int p, vector<float> tab){
   for (int r = 1; r< p+1; r++){
     for (int j = p; j > r-1; j--){
       float alpha = (t - tab[j+k-p])/(tab[j+1+k-r]- tab[j+k-p]);
-      d[j] = (1-alpha)*d[j-1] + alpha*d[j];
+      d[j] = (1.0-alpha)*d[j-1] + alpha*d[j];
     }
 
   }
@@ -45,15 +45,17 @@ Curve2DBsplines(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
 
   QPainterPath path(float frame) {
     QPainterPath p;
-    if(nbPts()==0)
+    if(nbPts()==0 ){
       return p;
-    unsigned int deg = 2;
+    }
+    p.moveTo(evalAnimPt(get(0),frame)[0],evalAnimPt(get(0),frame)[1]);
+    unsigned int deg = 3;
     vector<float> tab;
-    for (unsigned int i = 0; i< nbPts() + deg ; i++){
-      if( i < deg ){
+    for (unsigned int i = 0; i < nbPts() + deg; i++){
+      if( i <= deg ){
         tab.push_back(0);
-      } else if (i >= deg && i < nbPts()+1){
-        tab.push_back(float(i)/(deg+nbPts()));
+      } else if (i >= deg && i <= nbPts()){
+        tab.push_back(float(i)/(nbPts()));
       } else{
         tab.push_back(1);
       }
@@ -64,9 +66,9 @@ Curve2DBsplines(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
       D.push_back(evalAnimPt(get(i),frame));
     }
 
-    p.moveTo(D[0][0],D[0][1]);
-    uint N = 300;
-    for (unsigned int i = 4; i < N; i++){
+
+    uint N = 500;
+    for (unsigned int i = 0; i < N; i++){
       float t = float(i)/N;
       int k = find_index(tab, t);
       p.lineTo(de_boor(D, k, t, deg, tab)[0],de_boor(D, k, t, deg, tab)[1] );
