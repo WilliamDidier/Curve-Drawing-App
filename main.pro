@@ -25,10 +25,13 @@ HEADERS += \
     scene.h \
     curve1D.h \
     curve1DHermite.h \
+    curve1DRessortHermite.h \
     curve2DBsplines.h\
     curve2D.h \
     curve1DLinear.h \
     curve2DLinear.h \
+    Curve1DLinearRessort.h \
+    Curve1DLinearRebond.h \
     curve2DLinearclosed.h \
     curve1DBezier.h \
     curve2DBezier.h \
