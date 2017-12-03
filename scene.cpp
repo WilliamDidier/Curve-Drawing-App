@@ -7,13 +7,16 @@
 #include "curve2DLinear.h"
 #include "curve2DLinearclosed.h"
 #include "curve1DLinear.h"
+#include "curve1DLinearRessort.h"
 #include "curve1DLagrange.h"
 #include "curve_2D_lagrange.h"
 #include "curve2DBsplines.h"
 #include "curve1DHermite.h"
 #include "curve1DLagrange.h"
 #include "curve2Dhermite.h"
+#include "curve1DRessortHermite.h"
 #include "curve1DBSplines.h"
+#include "curve1DLinearRebond.h"
 
 
 
@@ -38,7 +41,10 @@ void Scene::initCurveBuilders() {
 void Scene::initFunctionBuilders() {
   addFunctionBuilder(new Curve1DLagrangeConstructor());
   addFunctionBuilder(new Curve1DHermiteConstructor());
+  addFunctionBuilder(new Curve1DRessortHermiteConstructor());
   addFunctionBuilder(new Curve1DLinearConstructor());
+  addFunctionBuilder(new Curve1DLinearRessortConstructor());
+  addFunctionBuilder(new Curve1DLinearRebondConstructor());
   addFunctionBuilder(new Curve1DBezierConstructor());
   addFunctionBuilder(new Curve1DLagrangeConstructor());
   addFunctionBuilder(new Curve1DBsplinesConstructor());
