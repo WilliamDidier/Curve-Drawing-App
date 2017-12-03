@@ -11,9 +11,7 @@ class Curve2Dlagrange : public Curve2D {
  public:
  Curve2Dlagrange(const QString &name) : Curve2D(name) {}
  Curve2Dlagrange(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
- float lagrange_newton( vector<float> A, vector<float> X, float x);
- vector<float> coef_newton(float frame);
- float lagrange_polynomial(float frame, float x);
+ Vector2f aitken_Neville(vector<Vector2f> tab, int n, float x, float frame);
  QPainterPath path(float frame);
 };
 
