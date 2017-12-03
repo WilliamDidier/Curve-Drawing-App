@@ -15,8 +15,14 @@
 #include "curve1DLagrange.h"
 #include "curve2Dhermite.h"
 #include "curve1DRessortHermite.h"
+#include "curve1DRebondHermite.h"
 #include "curve1DBSplines.h"
 #include "curve1DLinearRebond.h"
+#include "curve1DHermiteChange.h"
+#include "curve1DHermite_random.h"
+#include "curve2DBezierSin.h"
+#include "curve2DBezierWeird.h"
+#include "curve2DBsplinesChordal.h"
 
 
 
@@ -33,6 +39,9 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DBezierClosedConstructor());
   addCurveBuilder(new Curve2DBsplinesConstructor());
   addCurveBuilder(new Curve2DHermiteConstructor());
+  addCurveBuilder(new Curve2DBezierSinConstructor());
+  addCurveBuilder(new Curve2DBezierWeirdConstructor());
+  addCurveBuilder(new Curve2DBsplinesChordalConstructor());
 
 
 }
@@ -42,12 +51,15 @@ void Scene::initFunctionBuilders() {
   addFunctionBuilder(new Curve1DLagrangeConstructor());
   addFunctionBuilder(new Curve1DHermiteConstructor());
   addFunctionBuilder(new Curve1DRessortHermiteConstructor());
+  addFunctionBuilder(new Curve1DRebondHermiteConstructor());
   addFunctionBuilder(new Curve1DLinearConstructor());
   addFunctionBuilder(new Curve1DLinearRessortConstructor());
   addFunctionBuilder(new Curve1DLinearRebondConstructor());
   addFunctionBuilder(new Curve1DBezierConstructor());
   addFunctionBuilder(new Curve1DLagrangeConstructor());
   addFunctionBuilder(new Curve1DBsplinesConstructor());
+  addFunctionBuilder(new Curve1DHermite_randomConstructor());
+  addFunctionBuilder(new Curve1DHermiteChangeConstructor());
 }
 
 

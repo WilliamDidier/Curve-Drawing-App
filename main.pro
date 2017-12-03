@@ -26,6 +26,7 @@ HEADERS += \
     curve1D.h \
     curve1DHermite.h \
     curve1DRessortHermite.h \
+    curve1DRebondHermite.h \
     curve2DBsplines.h\
     curve2D.h \
     curve1DLinear.h \
@@ -40,6 +41,11 @@ HEADERS += \
     curve1DLagrange.h \
     curve2DBsplines.h \
     Curve2Dhermite.h\
+    curve1DHermiteChange.h \
+    curve1DHermite_random.h \
+    curve2DBezierSin.h \
+    curve2DBezierWeird.h \
+    curve2DBsplinesChordal.h \
     animatedPoint.h
 
 TEMPLATE = app
