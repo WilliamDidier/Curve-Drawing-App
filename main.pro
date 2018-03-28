@@ -1,5 +1,5 @@
 # define your application name here
-TARGET = bichmoute
+TARGET = CurveApp
 
 # add your source cpp files here
 SOURCES += \
